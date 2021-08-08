@@ -29,7 +29,7 @@ const Unit = ({unit}) => {
 }
 
 const App = (props) => {
-  const {units} = props;
+  // const {units} = props;
 
   return(
     <div className="App">

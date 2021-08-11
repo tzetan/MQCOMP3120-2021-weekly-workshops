@@ -1,6 +1,6 @@
 import React from 'react';
 // import './App.css';
-import Unit from './Unit'
+// import Unit from './Unit'
 import UnitList from './UnitList'
 import { useState } from 'react'
 
@@ -20,6 +20,11 @@ function App() {
   const [units, setUnits] = useState(unitList)
   const [newUnitCode, setNewUnitCode] = useState('')
   const [newUnitTitle, setNewUnitTitle] = useState('')
+  const [newUnitOfferings, setNewUnitOfferings] = useState([])
+  // const [checkbox, setCheckbox] = useState(false)
+
+  const offerings = ['S1', 'S2', 'S3']
+
 
   const addUnit = (event) => {
     event.preventDefault()
@@ -27,7 +32,7 @@ function App() {
     const newUnit = {
       code: newUnitCode,
       title: newUnitTitle,
-      offering: ['S1'],
+      offering: newUnitOfferings,
     }
 
     setUnits(units.concat(newUnit))
@@ -50,14 +55,33 @@ function App() {
       </ul>
 
       <form onSubmit={addUnit}>
-        <input
-          value={newUnitCode}
-          onChange={(inputText) => setNewUnitCode(inputText.target.value)}
-        />
-        <input
-          value={newUnitTitle}
-          onChange={(inputText) => setNewUnitTitle(inputText.target.value)}
-        />
+        <label>
+          Unit Code:
+          <input
+            value={newUnitCode}
+            onChange={(inputText) => setNewUnitCode(inputText.target.value)}
+          />
+        </label>
+        <label>
+          Unit Title:
+          <input
+            value={newUnitTitle}
+            onChange={(inputText) => setNewUnitTitle(inputText.target.value)}
+          />
+        </label>
+
+        <label> Unit Offerings: </label>
+        {offerings.map((offering, key) =>
+          <label key={key}>
+            {offering}
+            <input
+              value={offering}
+              onChange={(offering) => setNewUnitOfferings(newUnitOfferings.concat(offering.target.value))}
+              type="checkbox"
+            />
+          </label>
+        )}
+
         <button type="submit"> Add </button>
       </form>
 

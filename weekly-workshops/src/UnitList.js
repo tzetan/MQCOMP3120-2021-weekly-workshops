@@ -4,7 +4,9 @@ const UnitList = ({ content }) => {
 
     return (
         <div>
-            {content.map(unit => <Unit key={unit.code} unit={unit} />)}
+            <ul>
+                {content.map(unit => <Unit key={unit.code} unit={unit} />)}
+            </ul>
         </div>
     )
 }

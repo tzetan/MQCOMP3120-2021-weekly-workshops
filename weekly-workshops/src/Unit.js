@@ -7,8 +7,8 @@ const Unit = ({ unit }) => {
     return (
         <div className="unit">
             <li> {unit.code} {title} </li>
-            <button onClick={() => setTitle(title.toUpperCase())}> Up </button>
-            <button onClick={() => setTitle(title.toLowerCase())}> Down </button>
+            {/* <button onClick={() => setTitle(title.toUpperCase())}> Up </button>
+            <button onClick={() => setTitle(title.toLowerCase())}> Down </button> */}
         </div>
     )
 }

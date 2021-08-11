@@ -6,7 +6,7 @@ const Unit = ({ unit }) => {
 
     return (
         <div className="unit">
-            <li> {unit.code} {title} </li>
+            <li> {unit.code} {title} {unit.offering} </li>
             {/* <button onClick={() => setTitle(title.toUpperCase())}> Up </button>
             <button onClick={() => setTitle(title.toLowerCase())}> Down </button> */}
         </div>

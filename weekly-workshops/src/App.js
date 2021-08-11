@@ -31,24 +31,36 @@ function App() {
     }
 
     setUnits(units.concat(newUnit))
+    setNewUnitCode('')
+    setNewUnitTitle('')
   }
 
   // const handleUnitCode
 
   return (
     <div className="App">
+
       <header className="App-header">
         <h2> COMP3120: Advanced Web Development </h2>
       </header>
+
       <ul>
         <UnitList content={units} />
         {/* {units.map(unit => <Unit key={unit.code} unit={unit} />)} */}
       </ul>
+
       <form onSubmit={addUnit}>
-        <input />
-        <input />
+        <input
+          value={newUnitCode}
+          onChange={(inputText) => setNewUnitCode(inputText.target.value)}
+        />
+        <input
+          value={newUnitTitle}
+          onChange={(inputText) => setNewUnitTitle(inputText.target.value)}
+        />
         <button type="submit"> Add </button>
       </form>
+
     </div>
   )
 }

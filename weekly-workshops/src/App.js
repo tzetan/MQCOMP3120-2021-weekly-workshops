@@ -1,23 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import './App.css';
 // import Unit from './Unit'
 import UnitList from './UnitList'
 import Form from './Form';
-
-const unitList = [
-  { id: 0, code: 'COMP1010', title: 'Fundamentals of Computer Science', offering: ['S1', 'S2'] },
-  { id: 1, code: 'COMP1750', title: 'Introduction to Business Information Systems', offering: ['S1'] },
-  { id: 2, code: 'COMP2110', title: 'Web Technology', offering: ['S1', 'S2'] },
-  { id: 3, code: 'COMP2750', title: 'Applications Modelling and Development', offering: ['S1'] },
-  { id: 4, code: 'MMCC2045', title: 'Interactive Web Design', offering: ['S2'] },
-  { id: 5, code: 'COMP3120', title: 'Advanced Web Development', offering: ['S2'] },
-  { id: 6, code: 'COMP3130', title: 'Mobile Application Development', offering: ['S1'] }
-]
+import axios from 'axios';
 
 
 function App() {
 
-  const [units, setUnits] = useState(unitList)
+  const [units, setUnits] = useState([])
 
 
   const addUnit = ({ newUnitCode, newUnitTitle, newUnitOfferings, items }) => {
@@ -33,6 +24,15 @@ function App() {
 
     setUnits(units.concat(newUnit))
   }
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/units")
+      .then(response => {
+        console.log("we have a response", response)
+        setUnits(response.data)
+      })
+  },
+  [])
 
   // const handleUnitCode 
 

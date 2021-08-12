@@ -11,7 +11,7 @@ function App() {
   const [units, setUnits] = useState([])
 
 
-  const addUnit = ({ newUnitCode, newUnitTitle, newUnitOfferings, items }) => {
+  const addUnit = ( {newUnitCode, newUnitTitle, newUnitOfferings, items} ) => {
     // event.preventDefault()
 
     // setUnits([...units, { id: units.length, items: items }])
@@ -21,11 +21,23 @@ function App() {
       title: newUnitTitle,
       offering: newUnitOfferings,
     }
+    
+    axios.post("http://localhost:3001/units", newUnit)
+      .then(response => {
+          console.log("POST response: ", response.data)
 
-    setUnits(units.concat(newUnit))
+          setUnits(units.concat(response.data))
+
+          console.log("new unit added", newUnit)
+        }
+    )
+    // const newUnit = {id: units.length, content: items}
+
+    // setUnits([...units, newUnit])
   }
 
   useEffect(() => {
+    console.log("effect is running")
     axios.get("http://localhost:3001/units")
       .then(response => {
         console.log("we have a response", response)
@@ -34,6 +46,7 @@ function App() {
   },
   [])
 
+  console.log("rendering the App component")
   // const handleUnitCode 
 
   return (

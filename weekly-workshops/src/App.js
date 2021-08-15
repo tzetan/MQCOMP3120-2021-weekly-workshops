@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import UnitList from './UnitList'
 import Form from './Form';
 import axios from 'axios';
+import axiosService from './services/axiosService';
 
 
 function App() {
@@ -22,11 +23,12 @@ function App() {
       offering: newUnitOfferings,
     }
     
-    axios.post("http://localhost:3001/units", newUnit)
-      .then(response => {
-          console.log("POST response: ", response.data)
+    // axios.post("http://localhost:3001/units", newUnit)
+    axiosService.create(newUnit)
+      .then(items => {
+          console.log("POST response: ", items)
 
-          setUnits(units.concat(response.data))
+          setUnits(units.concat(items))
 
           console.log("new unit added", newUnit)
         }
@@ -38,12 +40,14 @@ function App() {
 
   useEffect(() => {
     console.log("effect is running")
-    axios.get("http://localhost:3001/units")
-      .then(response => {
-        console.log("we have a response", response)
-        setUnits(response.data)
+    // axios.get("http://localhost:3001/units")
+    axiosService.getAll()
+      .then(items => {
+        console.log("we have a response", items)
+
+        setUnits(items)
       })
-  },
+    },
   [])
 
   console.log("rendering the App component")

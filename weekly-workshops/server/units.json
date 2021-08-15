@@ -59,20 +59,13 @@
       ]
     },
     {
-      "code": "asdasd",
-      "title": "asdas",
+      "code": "sdasdas",
+      "title": "sdadwaw",
       "offering": [
-        "S3"
-      ],
-      "id": 7
-    },
-    {
-      "code": "sdfsfd",
-      "title": "sdfsdf",
-      "offering": [
+        "S1",
         "S2"
       ],
-      "id": 8
+      "id": 7
     }
   ]
 }

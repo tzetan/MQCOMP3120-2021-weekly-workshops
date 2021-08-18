@@ -1,0 +1,7 @@
+POST http://localhost:3001/api/units
+Content-Type: application/json
+
+{
+    "code": "comp1000",
+    "title": "itsmeeeee"
+}

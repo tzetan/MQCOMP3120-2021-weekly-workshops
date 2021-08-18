@@ -13,9 +13,14 @@ const create = (newItem) => {
         .then(response => response.data)
 }
 
+const deleteUnit = (unit) => {
+    return axios.delete(baseURL + "/" + unit.id, unit)
+        .then(response => response.data)
+}
+
 // const update = (unit) => {
 //     return axios.put(baseURL + "/" + unit.id, unit)
 //         .then (response => response.data)
 // }
 
-export default {getAll, create }
+export default { getAll, create, deleteUnit }

@@ -1,8 +1,9 @@
 const express = require('express')
 const cors = require('cors')
-
 const app = express()
+
 app.use(cors()) 
+app.use(express.json())
 
 
 // const units = [
@@ -38,6 +39,39 @@ app.get('/api/units/:id', (request, response) => {
     else {
         response.status(404).end()
     }
+})
+
+app.delete('/api/units/:id', (request, response) => {
+    const id = Number(request.params.id)
+    units.units = units.units.filter(unit => unit.id !== id)
+    response.status(204).end()
+})
+
+const generateID = () => {
+    const maxID = units.units.length > 0 
+    ? Math.max(...units.units.map(u => u.id))
+    : 0
+    return maxID + 1
+}
+
+app.post('/api/units', (request, response) => {
+    const body = request.body
+
+    if (!body.code || !body.title) {
+        return response.status(400).json({
+            error: 'code or title missing'
+        })
+    }
+
+    const unit = {
+        id: generateID(),
+        code: body.code,
+        title: body.title,
+        offering: body.offering
+    }
+
+    units.units = units.units.concat(unit)
+    response.json(unit)
 })
 
 const PORT = 3001

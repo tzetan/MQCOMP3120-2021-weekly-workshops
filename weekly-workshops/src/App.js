@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 // import Unit from './Unit'
 import UnitList from './UnitList'
 import Form from './Form';
-import axios from 'axios';
 import axiosService from './services/axiosService';
 
 
@@ -32,10 +31,26 @@ function App() {
 
           console.log("new unit added", newUnit)
         }
-    )
+      )
+      .catch((error) => {
+        alert("Code or Title is missing")
+      })
     // const newUnit = {id: units.length, content: items}
 
     // setUnits([...units, newUnit])
+  }
+
+  const handleDelete = (unit) => {
+    
+    // setUnits(newUnit)
+    axiosService.deleteUnit(unit)
+    .then(items => {
+        const newUnit = units.filter(item => item.id !== unit.id)
+        setUnits(newUnit)
+      })
+    .catch((error) => {
+      alert("There was an error")
+    })
   }
 
   useEffect(() => {
@@ -60,7 +75,8 @@ function App() {
         <h2> COMP3120: Advanced Web Development </h2>
       </header>
 
-      <UnitList content={units} />
+      {units.map((unit) => (<UnitList key={unit.id} unit={unit} handleDelete={handleDelete} />))}
+      {/* <UnitList unit={units} handleDelete={handleDelete} /> */}
 
       <Form updateFn={addUnit} />
 

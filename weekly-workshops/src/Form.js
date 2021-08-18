@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './App.css';
 
 const Form = ({ updateFn }) => {
 
@@ -38,27 +39,34 @@ const Form = ({ updateFn }) => {
     }
 
     return (
-        <form onSubmit={formHandller}>
-            <label>
-                Unit Code:
-                <input
-                    value={newUnitCode}
-                    onChange={(inputText) => setNewUnitCode(inputText.target.value)}
-                />
-            </label>
-            <label>
-                Unit Title:
-                <input
-                    value={newUnitTitle}
-                    onChange={(inputText) => setNewUnitTitle(inputText.target.value)}
-                />
-            </label>
+        <form className="form" onSubmit={formHandller}>
+            <div className="row">
+                <div className="five columns">
+                    <label>
+                        Unit Code:
+                        <input id="exampleEmailInput"
+                            value={newUnitCode}
+                            onChange={(inputText) => setNewUnitCode(inputText.target.value)}
+                        />
+                    </label>
+                </div>
+
+                <div className="seven columns">
+                    <label>
+                        Unit Title:
+                        <input
+                            value={newUnitTitle}
+                            onChange={(inputText) => setNewUnitTitle(inputText.target.value)}
+                        />
+                    </label>
+                </div>
+            </div>
 
             <label> Unit Offerings: </label>
             {offerings.map((offering, key) =>
                 <label key={key}>
                     {offering}
-                    <input
+                    <input className="u-full-width"
                         value={offering}
                         checked={checkbox[key]}
                         // onChange={(offering) => setNewUnitOfferings(newUnitOfferings.concat(offering.target.value))}
@@ -68,7 +76,7 @@ const Form = ({ updateFn }) => {
                 </label>
             )}
 
-            <button type="submit"> Add </button>
+            <button className="button-primary" type="submit"> Add </button>
         </form>
     )
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import './App.css';
+import './App.css';
 // import Unit from './Unit'
 import UnitList from './UnitList'
 import Form from './Form';
@@ -71,14 +71,24 @@ function App() {
   return (
     <div className="App">
 
-      <header className="App-header">
-        <h2> COMP3120: Advanced Web Development </h2>
-      </header>
+      <div className="row">
+        <div className="six columns">
+          <header className="App-header">
+            <h2> COMP3120: Advanced Web Development </h2>
+          </header>
 
-      {units.map((unit) => (<UnitList key={unit.id} unit={unit} handleDelete={handleDelete} />))}
-      {/* <UnitList unit={units} handleDelete={handleDelete} /> */}
+          {units.map((unit) => (<UnitList key={unit.id} unit={unit} handleDelete={handleDelete} />))}
+          {/* <UnitList unit={units} handleDelete={handleDelete} /> */}
+        </div>
+        <div className="form">
+          <div className="six columns">
+            <Form updateFn={addUnit} />
+          </div>
+        </div>
+      </div>
 
-      <Form updateFn={addUnit} />
+      
+
 
       {/* <form onSubmit={addUnit}>
         <label>

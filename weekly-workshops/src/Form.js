@@ -7,7 +7,7 @@ const Form = ({ updateFn }) => {
     const [newUnitCode, setNewUnitCode] = useState('')
     const [newUnitTitle, setNewUnitTitle] = useState('')
     const [newUnitOfferings, setNewUnitOfferings] = useState([])
-    const [checkbox, setCheckbox] = useState(false)
+    const [checkbox, setCheckbox] = useState(new Array(offerings.length).fill(false))
 
     const formHandller = (event) => {
         event.preventDefault()
@@ -15,7 +15,26 @@ const Form = ({ updateFn }) => {
         updateFn({ newUnitCode, newUnitTitle, newUnitOfferings })
         setNewUnitCode('')
         setNewUnitTitle('')
-        setCheckbox(false)
+        setNewUnitOfferings('')
+        setCheckbox(checkbox.map((item) => item === true ? false : false))
+    }
+
+    // const handleInputChange = (event) => {
+    //     const target = event.target
+    //     const value = target.type === 'checkbox' ? target.checked : target.value
+    //     const name = event.name
+
+
+    // }
+    
+    const handleOfferingChange = ({key, offering}) => {
+        // setCheckbox(event.target.checked)
+        const updateCheckbox = checkbox.map((item, index) => 
+            index === key ? !item : item
+        )
+
+        setCheckbox(updateCheckbox)
+        setNewUnitOfferings(newUnitOfferings.concat(offering.target.value))
     }
 
     return (
@@ -41,7 +60,9 @@ const Form = ({ updateFn }) => {
                     {offering}
                     <input
                         value={offering}
-                        onChange={(offering) => setNewUnitOfferings(newUnitOfferings.concat(offering.target.value))}
+                        checked={checkbox[key]}
+                        // onChange={(offering) => setNewUnitOfferings(newUnitOfferings.concat(offering.target.value))}
+                        onChange={(offering) => handleOfferingChange({key, offering})}
                         type="checkbox"
                     />
                 </label>

@@ -28,7 +28,7 @@ function App() {
       .then(items => {
           console.log("POST response: ", items)
 
-          setUnits(units.concat(items))
+          setUnits([...units, items])
 
           console.log("new unit added", newUnit)
         }

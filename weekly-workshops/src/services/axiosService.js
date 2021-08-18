@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 
-const baseURL = "http://localhost:3001/units"
-
+const baseURL = "http://localhost:3001/api/units"
+                            
 const getAll = () => {
     return axios.get(baseURL)
         .then(response => response.data)
@@ -13,4 +13,9 @@ const create = (newItem) => {
         .then(response => response.data)
 }
 
-export default {getAll, create}
+// const update = (unit) => {
+//     return axios.put(baseURL + "/" + unit.id, unit)
+//         .then (response => response.data)
+// }
+
+export default {getAll, create }

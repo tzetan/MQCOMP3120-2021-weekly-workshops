@@ -3,5 +3,6 @@ Content-Type: application/json
 
 {
     "code": "comp1000",
-    "title": "itsmeeeee"
+    "title": "itsmeeeee",
+    "offering": ["S1", "S2"]
 }

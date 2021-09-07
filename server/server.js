@@ -1,17 +1,11 @@
-const express = require('express')
-const cors = require('cors')
-const apiRouter = require("./controllers/api")
-const middleware = require("./utils/middleware")
+require('dotenv').config()
+const app = require('./app')
 
-const app = express()
 
-app.use(cors()) 
-app.use(express.json())
-app.use(middleware.requestLogger)
-app.use(express.static('build'))
-app.use(apiRouter)
-app.use(middleware.errorMiddleware)
-
+const PORT = process.env.PORT || 3001
+    app.listen(PORT, () => {
+        console.log(`server running on port ${PORT}`)
+})
 
 // const fs = require('fs')
 // const json = fs.readFileSync('server/units.json')
@@ -70,7 +64,3 @@ app.use(middleware.errorMiddleware)
 //     response.json(unit)
 // })
 
-const PORT = process.env.PORT || 3001
-    app.listen(PORT, () => {
-        console.log(`server running on port ${PORT}`)
-})

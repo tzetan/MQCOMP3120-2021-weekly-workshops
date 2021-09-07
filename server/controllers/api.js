@@ -31,6 +31,16 @@ apiRouter.get('/api/units', (req, res) => {
     })
 })
 
+apiRouter.get('/api/units/:id', (req, res) => {
+    Unit.findById(req.params.id)
+        .then(result => {
+            res.json(result)
+        })
+        .catch(error => {
+            res.status(404).json({error: "Not Found"})
+        })
+})
+
 apiRouter.post('/api/units', (req, res) => {
     // const token = getTokenFrom(req)
     // const decodedToken = jwt.verify(token, SECRET)
@@ -53,6 +63,13 @@ apiRouter.post('/api/units', (req, res) => {
     })
     // data.units.push(newUnit)
     // res.json(newUnit)
+})
+
+apiRouter.delete('/api/units/:id', (req, res) => {
+    Unit.findByIdAndRemove(req.params.id)
+        .then(result => {
+            res.status(204).end()
+        })
 })
 
 

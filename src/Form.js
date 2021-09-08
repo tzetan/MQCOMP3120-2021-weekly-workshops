@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 
-const Form = ({ updateFn }) => {
+const Form = ({ addUnit }) => {
 
     const offerings = ['S1', 'S2', 'S3']
 
@@ -13,7 +13,7 @@ const Form = ({ updateFn }) => {
     const formHandller = (event) => {
         event.preventDefault()
 
-        updateFn({ newUnitCode, newUnitTitle, newUnitOfferings })
+        addUnit({ newUnitCode, newUnitTitle, newUnitOfferings })
         setNewUnitCode('')
         setNewUnitTitle('')
         setNewUnitOfferings('')
@@ -62,19 +62,21 @@ const Form = ({ updateFn }) => {
                 </div>
             </div>
 
-            <label> Unit Offerings: </label>
-            {offerings.map((offering, key) =>
-                <label key={key}>
-                    {offering}
-                    <input className="u-full-width"
-                        value={offering}
-                        checked={checkbox[key]}
-                        // onChange={(offering) => setNewUnitOfferings(newUnitOfferings.concat(offering.target.value))}
-                        onChange={(offering) => handleOfferingChange({key, offering})}
-                        type="checkbox"
-                    />
-                </label>
-            )}
+            <label> Unit Offerings:
+                {offerings.map((offering, key) =>
+                    <label key={key}>
+                        {offering}
+                        <input className="u-full-width"
+                            value={offering}
+                            checked={checkbox[key]}
+                            // onChange={(offering) => setNewUnitOfferings(newUnitOfferings.concat(offering.target.value))}
+                            onChange={(offering) => handleOfferingChange({key, offering})}
+                            type="checkbox"
+                        />
+                    </label>
+                    
+                )}
+            </label>
 
             <button className="button-primary" type="submit"> Add </button>
         </form>

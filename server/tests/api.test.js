@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const fs = require('fs')
@@ -28,16 +32,16 @@ describe('api', () => {
             .expect('Content-Type', /application\/json/)
     })
 
-    test('there are seven units records', async () => {
-        const response = await api.get('/api/units')
-        expect(response.body).toHaveLength(7)
-    })
+    // test('there are seven units records', async () => {
+    //     const response = await api.get('/api/units')
+    //     expect(response.body).toHaveLength(7)
+    // })
 
-    test('a specific unit is within the returned units', async () => {
-        const response = await api.get('/api/units')
-        const title = response.body.map(u => u.title)
-        expect(title).toContain('Web Technology')
-    })
+    // test('a specific unit is within the returned units', async () => {
+    //     const response = await api.get('/api/units')
+    //     const title = response.body.map(u => u.title)
+    //     expect(title).toContain('Web Technology')
+    // })
 
     test('get request a specific unit', async () => {
         const initialUnit = await api.get('/api/units')

@@ -1,7 +1,6 @@
 /*
   Setting up the database and defining the schema
 */
-require("dotenv").config()
 const mongoose = require('mongoose')
 
 const url = process.env.MONGODB_URI
@@ -33,4 +32,6 @@ unitSchema.set('toJSON', {
   }
 })
 
-module.exports = mongoose.model("Unit", unitSchema)
+const Unit = mongoose.model("Unit", unitSchema)
+
+module.exports = Unit

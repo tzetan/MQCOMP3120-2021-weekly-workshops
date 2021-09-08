@@ -1,8 +1,10 @@
 
 const requestLogger = (request, response, next) => {
-    console.log(request.method, request.path)
-    console.log(request.body)
-    console.log('---')
+    if (process.env.NODE_ENV === 'development') {
+        console.log(request.method, request.path)
+        console.log(request.body)
+        console.log('---')
+    }
     next()
 }
 

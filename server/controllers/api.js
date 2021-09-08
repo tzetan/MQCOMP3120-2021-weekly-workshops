@@ -50,6 +50,9 @@ apiRouter.post('/api/units', (req, res) => {
     // }
 
     const body = req.body
+
+    
+
     const newUnit = new Unit({
         code: body.code,
         title: body.title,
@@ -58,9 +61,18 @@ apiRouter.post('/api/units', (req, res) => {
         // id: data.units.length
     })
 
-    newUnit.save().then(result => {
-        res.json(result)
-    })
+    if (!body.code || !body.title) {
+        res.status(400).json({
+            error: 'code or title missing'
+        })
+    } else {
+        newUnit.save().then(result => {
+            res.json(result)
+        })
+    }
+    // .catch(error => {
+    //     res.status(400).json({error: 'code or title missing'})
+    // })
     // data.units.push(newUnit)
     // res.json(newUnit)
 })

@@ -21,10 +21,16 @@ const LoginForm = ({user, setUser}) => {
             })
     }
 
+    const logoutHandler = () => {
+        setUser(null)
+    }
+
     if (user) {
         return (
             <div className="row">
-                <p>Logged In {user.name}</p>
+                <p>Logged In as {user.name}
+                    <button onClick={logoutHandler}>Logout</button>
+                </p>
             </div>
         )
     } else {

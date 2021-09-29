@@ -24,7 +24,7 @@ function App() {
     }
     
     // axios.post("http://localhost:3001/units", newUnit)
-    axiosService.create(newUnit)
+    axiosService.create(newUnit, user)
       .then(items => {
           console.log("POST response: ", items)
 

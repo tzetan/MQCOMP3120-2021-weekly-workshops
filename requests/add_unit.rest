@@ -1,5 +1,6 @@
 POST http://localhost:3001/api/units
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJib2JhbG9vYmEiLCJpYXQiOjE2MzI4OTUxNTF9.Daa0QxHHuYhFSVYPuFGL6_iOpZzgAWKuvAXgNffKXwg
 
 {
     "code": "comp1000",

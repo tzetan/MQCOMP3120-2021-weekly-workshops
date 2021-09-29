@@ -8,8 +8,15 @@ const getAll = () => {
         .then(response => response.data)
 }
 
-const create = (newItem) => {
-    return axios.post(baseURL, newItem)
+const create = (newItem, user) => {
+    
+    if (!user) {
+        return new Promise((res) => res(null))
+    }
+
+    const config = {headers: {Authorization: "Bearer " + user.token}}
+    
+    return axios.post(baseURL, newItem, config)
         .then(response => response.data)
 }
 

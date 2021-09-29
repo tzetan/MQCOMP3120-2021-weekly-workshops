@@ -4,12 +4,13 @@ import './App.css';
 import UnitList from './UnitList'
 import Form from './Form';
 import axiosService from './services/axiosService';
+import LoginForm from './LoginForm';
 
 
 function App() {
 
   const [units, setUnits] = useState([])
-
+  const [user, setUser] = useState(null)
 
   const addUnit = ( {newUnitCode, newUnitTitle, newUnitOfferings, items} ) => {
     // event.preventDefault()
@@ -72,6 +73,12 @@ function App() {
     <div className="App">
 
       <div className="row">
+        <div className="u-pull-right">
+          <LoginForm user={user} setUser={setUser} />
+        </div>
+      </div>
+
+      <div className="row">
         <div className="six columns">
           <header className="App-header">
             <h2> COMP3120: Advanced Web Development </h2>
@@ -80,9 +87,10 @@ function App() {
           {/* {units.map((unit) => (<UnitList key={unit.id} unit={unit} handleDelete={handleDelete} />))} */}
           <UnitList units={units} handleDelete={handleDelete} />
         </div>
+
         <div className="form">
           <div className="six columns">
-            <Form addUnit={addUnit} />
+            <Form user={user} addUnit={addUnit} />
           </div>
         </div>
       </div>

@@ -1,17 +1,17 @@
 const express = require('express')
-// const bcrypt = require("bcrypt")
-// const jwt = require("jsonwebtoken")
+const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
 const fs = require("fs")
 const Unit = require("../models/units")
 
-// const SECRET = process.env.SECRET
+const SECRET = process.env.SECRET
 
 const rawData = fs.readFileSync("server/units.json")
 const data = JSON.parse(rawData)
 
-// const getUser = (username) => {
-//     return data.users.filter(u => u.username === username)[0]
-// }
+const getUser = (username) => {
+    return data.users.filter(u => u.username === username)[0]
+}
 
 // const getTokenFrom = request => {
 //     const authorization = request.get('authorization')
@@ -84,5 +84,29 @@ apiRouter.delete('/api/units/:id', (req, res) => {
         })
 })
 
+apiRouter.post('/api/login', async (req, res) => {
+    const {username, password} = req.body
+
+    const user = getUser(username)
+    console.log(user)
+
+    if (!user) {
+        return res.status(401).json({error: "invalid username or password"})
+    }
+
+    if (await bcrypt.compare(password, user.password)) {
+        console.log("password good")
+
+        const userForToken = {
+            id: user.id,
+            username: user.username
+        }
+        const token = jwt.sign(userForToken, SECRET)
+
+        return res.status(200).json({token, username: user.username, name: user.name})
+    } else {
+        return res.status(401).json({error: "invalid username or password"})
+    }
+})
 
 module.exports = apiRouter

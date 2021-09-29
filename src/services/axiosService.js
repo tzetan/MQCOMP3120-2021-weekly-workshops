@@ -23,4 +23,9 @@ const deleteUnit = (unit) => {
 //         .then (response => response.data)
 // }
 
-export default { getAll, create, deleteUnit }
+const login = ({username, password}) => {
+    return axios.post('/api/login', {username, password})
+        .then(response => response.data)
+}
+
+export default { getAll, create, deleteUnit, login }

@@ -58,5 +58,19 @@
         "S1"
       ]
     }
+  ],
+  "users": [
+    {
+      "id": 0,
+      "username": "contrary",
+      "name": "Mary Contrary",
+      "password": "$2b$10$197THcRJA4JIZl60Ctrkv.aerTc6D4k.P8rL5JT1ou31oI023t3hu"
+    },
+    {
+      "id": 1,
+      "username": "bobalooba",
+      "name": "Bob Bobalooba",
+      "password": "$2b$10$uvfOIJiWmc1Cvtvir4j3JuJpFIdZsdRxdKJ5jBDyV3mONI0fLLiKy"
+    }
   ]
 }

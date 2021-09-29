@@ -10,14 +10,20 @@ const Unit = require("../models/units")
 
 const api = supertest(app)
 
-const sampleData = (fileName) => {
+const sampleData = async (fileName) => {
     const rawData = fs.readFileSync(fileName)
     const data = JSON.parse(rawData)
 
-    data.units.map(async record => {
+    // data.units.map(async record => {
+    //     const l = new Unit(record)
+    //     await l.save()
+    // })
+
+    for(let i=0; i<data.units.length; i++) {
+        const record = data.units[i]
         const l = new Unit(record)
         await l.save()
-    })
+    }
 }
 
 describe('api', () => {
@@ -64,7 +70,7 @@ describe('api', () => {
             .expect(404)
             .expect('Content-Type', /application\/json/)
     })
-    
+
     test('post request adds a new unit', async () => {
         const newUnit = {
             code: "PICT3011",
@@ -78,6 +84,7 @@ describe('api', () => {
             .expect('Content-Type', /application\/json/)
 
         const response = await api.get('/api/units')
+        console.log(response.body)
         expect(response.body).toHaveLength(8)
     })
 
@@ -92,6 +99,7 @@ describe('api', () => {
             .expect(400)
 
         const response = await api.get('/api/units')
+        console.log(response.body)
         expect(response.body).toHaveLength(7)
     })
 

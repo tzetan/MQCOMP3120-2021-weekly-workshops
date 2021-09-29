@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 
-const Form = ({ addUnit }) => {
+const Form = ({ user, addUnit }) => {
 
     const offerings = ['S1', 'S2', 'S3']
 
@@ -38,49 +38,53 @@ const Form = ({ addUnit }) => {
         setNewUnitOfferings(newUnitOfferings.concat(offering.target.value))
     }
 
-    return (
-        <form className="form" onSubmit={formHandller}>
-            <div className="row">
-                <div className="five columns">
-                    <label>
-                        Unit Code:
-                        <input id="exampleEmailInput"
-                            value={newUnitCode}
-                            onChange={(inputText) => setNewUnitCode(inputText.target.value)}
-                        />
-                    </label>
+    if (user) {
+        return (
+            <form className="form" onSubmit={formHandller}>
+                <div className="row">
+                    <div className="five columns">
+                        <label>
+                            Unit Code:
+                            <input id="exampleEmailInput"
+                                value={newUnitCode}
+                                onChange={(inputText) => setNewUnitCode(inputText.target.value)}
+                            />
+                        </label>
+                    </div>
+    
+                    <div className="seven columns">
+                        <label>
+                            Unit Title:
+                            <input
+                                value={newUnitTitle}
+                                onChange={(inputText) => setNewUnitTitle(inputText.target.value)}
+                            />
+                        </label>
+                    </div>
                 </div>
-
-                <div className="seven columns">
-                    <label>
-                        Unit Title:
-                        <input
-                            value={newUnitTitle}
-                            onChange={(inputText) => setNewUnitTitle(inputText.target.value)}
-                        />
-                    </label>
-                </div>
-            </div>
-
-            <label> Unit Offerings:
-                {offerings.map((offering, key) =>
-                    <label key={key}>
-                        {offering}
-                        <input className="u-full-width"
-                            value={offering}
-                            checked={checkbox[key]}
-                            // onChange={(offering) => setNewUnitOfferings(newUnitOfferings.concat(offering.target.value))}
-                            onChange={(offering) => handleOfferingChange({key, offering})}
-                            type="checkbox"
-                        />
-                    </label>
-                    
-                )}
-            </label>
-
-            <button className="button-primary" type="submit"> Add </button>
-        </form>
-    )
+    
+                <label> Unit Offerings:
+                    {offerings.map((offering, key) =>
+                        <label key={key}>
+                            {offering}
+                            <input className="u-full-width"
+                                value={offering}
+                                checked={checkbox[key]}
+                                // onChange={(offering) => setNewUnitOfferings(newUnitOfferings.concat(offering.target.value))}
+                                onChange={(offering) => handleOfferingChange({key, offering})}
+                                type="checkbox"
+                            />
+                        </label>
+                        
+                    )}
+                </label>
+    
+                <button className="button-primary" type="submit"> Add </button>
+            </form>
+        )
+    } else {
+        return (<p>You must be logged in to post units</p>)
+    }
 }
 
 export default Form;

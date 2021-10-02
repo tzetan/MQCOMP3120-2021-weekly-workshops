@@ -25,6 +25,7 @@ const LoginForm = ({user, setUser}) => {
         setUser(null)
     }
 
+    //shows login status
     if (user) {
         return (
             <div className="row">
